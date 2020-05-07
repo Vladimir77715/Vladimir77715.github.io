@@ -1816,15 +1816,15 @@ c1.8-0.6,3-0.1,3.8,0.9c2.1,2.5,7.8,8.4,9.2,10.3L37.1,53.3"></path>
                 anotherRev.fadeIn("slow");
             }, 500);
 
-            $( window ).on('resize',function() {
-                // console.log(!riviewText.hasClass('ReviewFullText'));
-                // console.log(riviewText.hasClass('ReviewFullText'));
-                // if(!riviewText.hasClass('ReviewFullText')) {
-                //     shadowController();
-                    console.log('reisze');
-                // }
-            });
-        })
+        });
+        $( window ).on('resize',function() {
+            // console.log(!riviewText.hasClass('ReviewFullText'));
+            console.log(riviewText.hasClass('ReviewFullText'));
+            if(!riviewText.hasClass('ReviewFullText')) {
+                shadowController();
+            // console.log('reisze');
+             }
+        });
     } );
 
 </script>
