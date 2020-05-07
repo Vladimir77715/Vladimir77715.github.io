@@ -1819,17 +1819,16 @@ c1.8-0.6,3-0.1,3.8,0.9c2.1,2.5,7.8,8.4,9.2,10.3L37.1,53.3"></path>
         });
         $('.add_btn_t').on('click', () => {
             localStorage.setItem('adding_clk' , '1');
+            $('#clicker_add_text').removeClass('unvisibleElem');
         });
         // clicker_add_chk
         $('#exampleModalLong').on('hidden.bs.modal',() => {
             if(localStorage.getItem('adding_clk')) {
-                console.log(localStorage.getItem('adding_clk'));
                 $('#clicker_add_chk').prop('checked', true);
             }
         });
         $('#clicker_add_chk').on('change', () =>{
             if($('#clicker_add_chk').prop('checked')) {
-                console.log('rrr');
                 $('#clicker_add_text').removeClass('unvisibleElem');
             } else {
                 console.log('rrr');
