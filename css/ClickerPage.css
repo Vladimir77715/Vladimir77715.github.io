@@ -796,7 +796,6 @@ body{
     height: 31px!important;
     left: 256px!important;
     top: 3735px!important;
-    font-family: "Proxima Nova"!important;
     font-style: normal!important;
     font-weight: bold!important;
     font-size: 23px!important;
@@ -833,7 +832,6 @@ body{
     justify-content: center;
 }
 .footer_t_h{
-    font-family: "Proxima Nova";
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
