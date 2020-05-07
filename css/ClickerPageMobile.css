@@ -1,0 +1,83 @@
+.mobile_container{
+    width: auto!important;
+}
+.modal_content_m{
+    width: auto!important;
+}
+.main_container_m{
+    width: auto!important;
+}
+.review_block_m{
+    width: auto!important;
+    margin-left: 5%!important;
+    margin-right: 5%!important;
+}
+.review_block_text{
+    margin-left: 5%!important;
+    margin-right: 5%!important;
+    width: auto!important;
+}
+.review_block_m_shadow{
+    width: auto!important;
+}
+.about_b_m{
+    display: block!important;
+}
+.about_item_m{
+    padding: 0!important;
+    margin: 0 5% !important;
+}
+.add_btn_m{
+    width: auto!important;
+}
+.add_btn_m >p{
+    width: auto!important;
+}
+.about_us_h_m{
+    padding-top: 20px;
+}
+.footer_m{
+ width: auto!important;
+ height: auto!important;
+    margin-top: 5%!important;
+    margin-bottom: 5%!important;
+}
+.footer_h_m{
+    width: auto!important;
+    height: auto!important;
+}
+.footer_t_h_m{
+    width: auto!important;
+    height: auto!important;
+}
+.footer_t_h_d{
+    font-size: 25px!important;
+}
+.footer_t_h_m_f{
+    font-size: 15px!important;
+}
+.icons_m{
+ width: auto!important;
+ height: auto!important;
+
+}
+.footer_i_m{
+    margin-left: auto;
+    height: auto;
+    margin-left: 0!important;
+    margin-top: 5px!important;
+
+}
+.colse_btn{
+    position: fixed!important;
+    color: black!important;
+    text-shadow: none!important;
+}
+.modal_dialog_m{
+    margin: 0;
+}
+.img_m{
+    width: 52px;
+    height: 52px;
+}
+
