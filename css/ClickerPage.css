@@ -577,6 +577,10 @@ body{
     padding-left: 36px;
 }
 
+.item_ul {
+    padding: 0;
+}
+
 .item_ul > li{
     display: list-item;
     list-style: disc inside;
@@ -588,10 +592,10 @@ body{
     cursor: pointer;
 }
 .menu ul > li:not(:first-child) {
-    padding-top: 2px;
+    padding-top: 8px;
 }
 .menu ul > li:last-child {
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 .menu .title {
     font-size: 18px;
