@@ -1790,7 +1790,7 @@ c1.8-0.6,3-0.1,3.8,0.9c2.1,2.5,7.8,8.4,9.2,10.3L37.1,53.3"></path>
             // Array.from($(id + ' > ul > li')).forEach(value => {
                  console.log('degubHere');
                 console.log($(id + ' > ul')[0].scrollHeight);
-                max_height = $(id + ' > ul').scrollHeight;
+                max_height = $(id + ' > ul')[0].scrollHeight;
                 // console.log(max_height);
             // });
             //list_size * element_height + list_size * padding_element + 40;
