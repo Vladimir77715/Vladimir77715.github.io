@@ -676,7 +676,7 @@ body{
 .ReviewFullText {
     overflow-y: visible;
     cursor: pointer;
-    max-height: 1500px;
+    max-height: 500px;
 }
 .unvisibleElem {
     visibility: hidden;
