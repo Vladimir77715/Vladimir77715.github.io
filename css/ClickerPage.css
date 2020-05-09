@@ -592,7 +592,7 @@ body{
     cursor: pointer;
 }
 .menu ul > li:not(:first-child) {
-    padding-top: 8px;
+    padding-top: 12px;
 }
 .menu ul > li:last-child {
     margin-bottom: 25px;
