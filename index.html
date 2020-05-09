@@ -1787,7 +1787,6 @@ c1.8-0.6,3-0.1,3.8,0.9c2.1,2.5,7.8,8.4,9.2,10.3L37.1,53.3"></path>
             if( $(id).hasClass('open') ) $(id + ' > ul').css('max-height', (max_height + 'px'));
 
             $(id).on('click', (event) => {
-                event.stopPropagation();
                 $(id + ' > ul').css('max-height') === (max_height + 'px') ? $(id + ' > ul').css('max-height', '0px') : $(id + ' > ul').css('max-height', (max_height + 'px'));
                 $(id).toggleClass('open');
                 console.log('here we go');
@@ -1799,23 +1798,13 @@ c1.8-0.6,3-0.1,3.8,0.9c2.1,2.5,7.8,8.4,9.2,10.3L37.1,53.3"></path>
                 console.log($('#close_icon_'+i).hasClass('unvisibleElem'));
                 console.log('here we cloze');
             });
-            // $('#open_icon_'+i).on('click', () => {
-            //     $(id + ' > ul').css('max-height') === (max_height + 'px') ? $(id + ' > ul').css('max-height', '0px') : $(id + ' > ul').css('max-height', (max_height + 'px'));
-            //     $(id).toggleClass('open');
-            //     $('#open_icon_'+i).toggleClass('unvisibleElem');
-            //     $('#close_icon_'+i).toggleClass('unvisibleElem');
-            //     console.log($('#open_icon_'+i).hasClass('unvisibleElem'));
-            //     console.log($('#close_icon_'+i).hasClass('unvisibleElem'));
-            // });
-            //
-            // $('#close_icon_'+i).on('click', () => {
-            //     $(id + ' > ul').css('max-height') === (max_height + 'px') ? $(id + ' > ul').css('max-height', '0px') : $(id + ' > ul').css('max-height', (max_height + 'px'));
-            //     $(id).toggleClass('open');
-            //     $('#open_icon_'+i).toggleClass('unvisibleElem');
-            //     $('#close_icon_'+i).toggleClass('unvisibleElem');
-            //     console.log($('#open_icon_'+i).hasClass('unvisibleElem'));
-            //     console.log($('#close_icon_'+i).hasClass('unvisibleElem'));
-            // });
+            $('#open_icon_'+i).on('click', (event) => {
+                event.stopPropagation();
+            });
+
+            $('#close_icon_'+i).on('click', (event) => {
+                event.stopPropagation();
+            });
         };
 
         let riviewText = $('.ReviewShortText ');
