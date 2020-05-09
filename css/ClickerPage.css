@@ -970,3 +970,80 @@ body{
     margin-left: 28px;
     opacity: 1.0!important;
 }
+
+.boot_accord a:focus,
+.boot_accord a:hover,
+.boot_accord a:active {
+    outline: 0;
+    text-decoration: none;
+}
+
+.boot_accord.panel {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #fff;
+    background: none;
+    box-shadow: none;
+}
+
+.boot_accord.panel:last-child {
+    border-bottom: none;
+}
+
+.boot_accord.panel-group > .panel:first-child .panel-heading {
+    border-radius: 4px 4px 0 0;
+}
+
+.boot_accord.panel-group .panel {
+    border-radius: 0;
+}
+
+.boot_accord.panel-group .panel + .panel {
+    margin-top: 0;
+}
+
+.boot_accord.panel-heading {
+    border-radius: 0;
+    border: none;
+    color: #fff;
+    padding: 0;
+}
+
+
+.boot_accord.panel-title a >p{
+    display: block;
+    color: #fff;
+    position: relative;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0;
+
+}
+
+.boot_accord.panel-body {
+    color: white;
+    border-top: none!important;
+    padding: 0;
+}
+.boot_accord.panel-body:not(first-cild) {
+    padding-top:10px ;
+}
+
+.boot_accord.panel:last-child .panel-body {
+
+}
+
+.boot_accord.panel:last-child .panel-heading {
+    border-radius: 0 0 4px 4px;
+    transition: border-radius 0.3s linear 0.2s;
+}
+
+.boot_accord.panel:last-child .panel-heading.active {
+    border-radius: 0;
+    transition: border-radius linear 0s;
+}
+/* #bs-collapse icon scale option */
+
+.boot_accord.text-padding{
+    padding-left: 15px;padding-right: 15px;
+}
