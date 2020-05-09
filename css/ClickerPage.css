@@ -955,14 +955,14 @@ body{
 }
 .Ocross{
     font-weight: 300;
-    width: 44.13px;
+    width: 40.13px;
     height: 95.88px;
     font-family: 'Proxima Nova Lt', sans-serif;
-    font-size: 50px;
+    font-size: 30px;
     color: white;
     transform: rotate(-45deg);
     cursor: pointer;
-    margin-top: -26px;
-    margin-left: 14px;
+    margin-top: -19px;
+    margin-left: 28px;
     opacity: 1.0!important;
 }
