@@ -923,3 +923,17 @@ body{
 .offerta_block a{
     text-decoration: underline;
 }
+.cross{
+     font-weight: 300;
+    width: 44.13px;
+    height: 95.88px;
+    font-family: 'Proxima Nova Lt', sans-serif;
+    position: absolute;
+    font-size: 50px;
+    color: white;
+    /* font-family: 'PT Sans',sans-serif; */
+    transform: rotate(-45deg);
+    left: 96%;
+    top: -1%;
+    cursor: pointer;"
+}
