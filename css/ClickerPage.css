@@ -960,10 +960,9 @@ body{
     font-family: 'Proxima Nova Lt', sans-serif;
     font-size: 50px;
     color: white;
-    /* font-family: 'PT Sans',sans-serif; */
     transform: rotate(-45deg);
     cursor: pointer;
-    margin-right: -27px;
-    margin-top: -18px;
+    margin-top: -26px;
+    margin-left: 14px;
     opacity: 1.0!important;
 }
