@@ -628,7 +628,9 @@ body{
     border-width: 0px 0px 1px 0px;
     padding-bottom: 0;
 }
-
+.title:hover{
+    color: cornflowerblue;
+}
 
 
 
@@ -639,9 +641,7 @@ body{
 .menu.open ul {
 
 }
-.menu:hover{
-    color: cornflowerblue;
-}
+
 .main_container{
     background: #1A3F5F;
     width: 524px;
