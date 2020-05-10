@@ -85,9 +85,13 @@
     margin-left: 10px;
     margin-right: 10px;
     width: auto!important;
-    float: none!important;
-    opacity: 1!important;
+
 }
 .crossBlock_m{
     margin-left: 92%!important;
+}
+.orrefta_add_m{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto!important;
 }
