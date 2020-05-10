@@ -584,6 +584,7 @@ body{
 .item_ul > li{
     display: list-item;
     list-style: disc inside;
+    font-size: 18px;
 }
 .flex_icon{
     display: flex;
