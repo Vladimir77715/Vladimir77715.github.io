@@ -615,6 +615,9 @@ body{
     cursor: pointer;
     color: white;
 }
+.icons_box:hover{
+    color: cornflowerblue;
+}
 .menu .title::before {
     content: '';
     font-size: 80%;
