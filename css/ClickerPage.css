@@ -632,9 +632,7 @@ body{
     color: cornflowerblue;
 }
 
-.menu:hover{
-    color: cornflowerblue;
-}
+
 
 .menu.open .title::before {
     content: ' ';
@@ -642,6 +640,9 @@ body{
 
 .menu.open ul {
 
+}
+.menu:hover{
+    color: cornflowerblue;
 }
 .main_container{
     background: #1A3F5F;
