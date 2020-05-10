@@ -977,7 +977,10 @@ body{
 }
 
 .offerta_add{
-
+    width: 464px;
+    height: 71px;
+    margin-bottom: 23px;
+    background: rgb(193, 43, 40);
     float: none!important;
     opacity: 1!important;
 }
