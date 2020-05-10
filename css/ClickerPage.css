@@ -626,7 +626,7 @@ body{
     padding-bottom: 0;
 }
 .title:hover{
-    border-color: transparent;
+    color: cornflowerblue;
 }
 .menu.open .title::before {
     content: ' ';
