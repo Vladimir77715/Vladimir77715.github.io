@@ -716,7 +716,7 @@ body{
 
 }
 .AnotherReview >p:hover {
-    border-style: none;
+    color: white;
 }
 .AnotherReviewUnderline {
     display: none;
