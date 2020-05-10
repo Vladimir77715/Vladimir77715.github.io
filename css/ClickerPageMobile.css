@@ -85,7 +85,8 @@
     margin-left: 10px;
     margin-right: 10px;
     width: auto!important;
+    float: none!important;
 }
 .crossBlock_m{
-    margin-left: 95%!important;
+    margin-left: 92%!important;
 }
