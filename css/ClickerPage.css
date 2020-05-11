@@ -802,6 +802,7 @@ body{
 .about_us_container{
     max-width: 460px;
     margin: 0px auto;
+    padding-top: 25px;
 }
 .about_us_header{
     font-family: "Proxima Nova Rg", sans-serif;
@@ -927,7 +928,7 @@ body{
     margin-right: 20px;
     text-align: center;
     margin-bottom: 30px;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 19px;
 }
 .offerta_block a{
@@ -984,6 +985,10 @@ body{
     background: rgb(193, 43, 40);
     float: none!important;
     opacity: 1!important;
+}
+.offerta_add:hover{
+    cursor: pointer;
+    background: rgb(193, 113, 80);
 }
 .orrefta_o{
     margin-top: 23px!important;
