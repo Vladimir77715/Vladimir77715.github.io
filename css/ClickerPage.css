@@ -866,7 +866,7 @@ body{
 }
 .add_btn:hover{
     cursor: pointer;
-    background: rgb(193, 113, 80);
+    background: #0A1AC4;
 }
 .footer_c{
     background-color: rgb(8, 63, 98);
@@ -988,7 +988,7 @@ body{
 }
 .offerta_add:hover{
     cursor: pointer;
-    background: rgb(193, 113, 80);
+    background: #0A1AC4;
 }
 .orrefta_o{
     margin-top: 23px!important;
