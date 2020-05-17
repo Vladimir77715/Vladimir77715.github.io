@@ -1,0 +1,23 @@
+﻿/*<!--*/(function() {var qss="&cb="+Math.floor(99999999999*Math.random());try{qss+="&ref="+encodeURIComponent(document.referrer)}catch(e){}try{qss+="&sc_r="+encodeURIComponent(screen.width+"x"+screen.height)}catch(e){}try{qss+="&sc_d="+encodeURIComponent(screen.colorDepth.toString())}catch(e){}var callDis=function(e,t,n,o){function c(){callDisInternal(e,t,n,o)}"complete"===document.readyState?setTimeout(c):window.addEventListener?window.addEventListener("load",c,!1):window.attachEvent("onload",c)},disCalled=!1,callDisInternal=function(e,t,n,o){if(!disCalled){disCalled=!0;var c=(n?"https:":"")+"//"+t+"/dis/dis.aspx",r=document.createElement("iframe");if(r.width=r.height="0",r.style.display="none",r.title="Criteo DIS iframe",void 0!==o&&""!==o&&(document.body.appendChild(r),null!=r.contentDocument))return r.contentDocument.open(),r.contentDocument.write(o),void r.contentDocument.close();r.src=(c+"?p="+e+qss).substring(0,2e3);var i=document.getElementById("criteoTagsContainer");i?(i.appendChild(r),"undefined"!=typeof criteo_q&&"function"==typeof criteo_q.removeLater&&criteo_q.removeLater(r)):criteo_q.push({event:"appendTag",element:r})}};
+callDis(25370, 'widget.eu.criteo.com', true, '<!-- default response -->');
+})();
+
+(function() {
+var callWCADestination = function(aurl) {
+    var url = 'https://' + aurl;
+    var p = document.createElement('iframe');
+    p.width = p.height = '0';
+    p.style.display = 'none';
+    var iframeSource = "javascript:(function(){var d=document;";
+    iframeSource += 'd.createElement("img").src="' + encodeURI(url) + '";';
+    iframeSource += "setTimeout(function(){d.open();d.write('');d.close();},1000);})();";
+    p.src = iframeSource;
+    if (criteo_q) {
+        criteo_q.push({ event: 'appendTag', element: p, requiresDOM: 'non-blocking' });
+    }
+}
+var cto_fw_url = 'www.facebook.com/tr/?id=2389707127925289&ev=AddToCart&cd[content_type]=product&cd[content_ids]=%5B%227874855924937925082%22%2C%22-3594639137343683241%22%5D&cd[product_catalog_id]=625673447879854&cd[product_category]=967646637&cd[criteo_audience_3_0]=B3&cd[external_id]=aed71e85-e195-4095-b05f-f51b4917f1f7&cd[application_id]=423936147658676';
+callWCADestination(cto_fw_url);})();
+
+
+/*-->*/
