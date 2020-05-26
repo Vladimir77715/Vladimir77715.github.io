@@ -1,0 +1,45 @@
+(function (window, document) { 
+try { 
+if (document.readyState !== 'interactive' && document.readyState !== 'complete') { 
+   var callee = arguments.callee; 
+   setTimeout(function () { callee(window, document) }, 100); 
+   return; 
+}
+
+(function (window, document) { 
+try { 
+(function () {
+                var body = document.getElementsByTagName('body')[0];
+                if (body) {
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = decodeURIComponent('%3Cimg%20src%3D%22%2F%2Ftop-fwz1.mail.ru%2Fcounter%3Fid%3D2869780%3Bjs%3Dna%22%20style%3D%22border%3A0%3Bposition%3Aabsolute%3Bleft%3A-9999px%3B%22%2F%3E%0D%0A');
+                    for (var i = 0; i < tmp.childNodes.length; i++) {
+                        body.appendChild(tmp.childNodes[i]);
+                    }
+                }
+            })();
+} catch (e) { 
+console.log(e); 
+} 
+})(window, document);
+
+(function (window, document) { 
+try { 
+(function () {
+                var body = document.getElementsByTagName('body')[0];
+                if (body) {
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = decodeURIComponent('%3Cimg%20src%3D%22%2F%2Ftop-fwz1.mail.ru%2Fcounter%3Fid%3D3037114%3Bjs%3Dna%22%20style%3D%22border%3A0%3Bposition%3Aabsolute%3Bleft%3A-9999px%3B%22%20alt%3D%22%22%20%2F%3E');
+                    for (var i = 0; i < tmp.childNodes.length; i++) {
+                        body.appendChild(tmp.childNodes[i]);
+                    }
+                }
+            })();
+} catch (e) { 
+console.log(e); 
+} 
+})(window, document);
+} catch (e) { 
+console.log(e); 
+} 
+})(window, document);

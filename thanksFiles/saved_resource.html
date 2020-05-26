@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="en" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta content="chrome=1" http-equiv="X-UA-Compatible">
+  <meta content="" name="description">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+  <link href="./css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      margin: 0;
+      font-family: PTSans, Arial, Helvetica, sans-serif;
+      color: #000;
+      font-weight: 100;
+    }
+    
+    .HD-wrap {
+      width: 620px;
+      height: 340px;
+      background: url("https://assets.flocktory.com/uploads/clients/2679/0ba66566-98db-4ef8-9031-07838c2e7556_Image.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      -webkit-background-size: contain;
+      background-size: cover;
+      margin: 0 auto;
+      padding: 30px 38px 38px;
+      box-sizing: border-box;
+    }
+    
+    .HD-title {
+      margin: 0 0 20px;
+    }
+    
+    .HD-title--name {
+      width: 100%;
+      color: #1d84bd;
+      font-family: PTSans, sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 26px;
+      text-align: center;
+    }
+    
+    .HD-title--name span {
+      font-weight: 700;
+    }
+    
+    .HD-share {
+      text-align: center;
+    }
+    
+    .HD-share--title_text {
+      color: #36404a;
+      font-family: PTSans, sans-serif;
+      font-size: 17px;
+      vertical-align: middle;
+    }
+    
+    .HD-share--form_wrap {
+      display: none;
+    }
+    
+    .HD-share--form_wrap.open {
+      display: block;
+    }
+    
+    .HD-share--form {
+      margin-top: 15px;
+    }
+    
+    .HD-share--form_icons {
+      text-align: center;
+      font-size: 0;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    .share-btns {
+      display: inline-block;
+      width: 29px;
+      height: 29px;
+      cursor: pointer;
+      margin-right: 4px;
+    }
+    
+    .share-btns:last-child {
+      margin-right: 0;
+    }
+    
+    .share-btns.vk {
+      background: url("https://assets.flocktory.com/uploads/clients/2680/1ff7cb76-c14e-4a63-b30e-4e896dd72b83_Vkontakte.png") center center no-repeat;
+      background-size: contain;
+    }
+    
+    .share-btns.ok {
+      background: url("https://assets.flocktory.com/uploads/clients/2680/69123936-ca89-40b4-9ac1-fed43a1f2673_Odnoklassniki.png") center center no-repeat;
+      background-size: contain;
+    }
+    
+    .share-btns.fb {
+      background: url("https://assets.flocktory.com/uploads/clients/2680/724ad441-62a3-40c4-b20f-57da1d1ea769_Facebook.png") center center no-repeat;
+      background-size: contain;
+    }
+    
+    .share-btns.tw {
+      background: url("https://assets.flocktory.com/uploads/clients/2680/8adfd7e3-76a8-4408-99b8-7f07187e8c3d_Twitter.png") center center no-repeat;
+      background-size: contain;
+    }
+    
+    .share-btns.mail {
+      background: url("https://assets.flocktory.com/uploads/clients/2680/b8110649-b418-433c-86b6-940a897dd891_Mail.png") center center no-repeat;
+      background-size: contain;
+    }
+    
+    .HD-share--form_inputs {
+      margin-top: 10px;
+      font-size: 0;
+    }
+    
+    .inpItem {
+      color: #36404a;
+      font-family: PTSans, sans-serif;
+      font-size: 17px;
+      font-weight: 400;
+      padding: 3px;
+      box-sizing: border-box;
+      height: 36px;
+      border: none;
+      vertical-align: top;
+    }
+    
+    .inpItem-btnWrap {
+      display: block !important;
+      vertical-align: top;
+    }
+    
+    .inpItem.email {
+      width: 70%;
+      display: block;
+      margin: 0 auto 10px auto;
+      padding: 5px 10px;
+    }
+    
+    .inpItem.name {
+      width: 250px;
+      padding: 5px 10px;
+      display: none;
+    }
+    
+    .inpItem.btn {
+      width: 70%;
+      margin: 0 auto;
+      background: #329fdc;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .HD-share--form_err {
+      text-align: left;
+      font-size: 13px;
+      color: red;
+    }
+    
+    .HD-share--form_err.with_error + .HD-share--form_err + .HD-share--form_success {
+      display: none;
+    }
+    
+    .HD-share--form_success {
+      text-align: left;
+      font-size: 13px;
+      color: green;
+    }
+    
+    .HD-share--form_success:empty {
+      display: none;
+    }
+    
+    .HD-share--form_success::before {
+      content: "Отправлено на ";
+    }
+    
+    .closeBtn {
+      display: none;
+    }
+  </style>
+<script type="text/javascript">
+var h = window['h'] = {};
+
+h.current = {
+  host:            "flocktory.com",
+  email:           'ivan@ivanovichivan.ov',
+  domain:          'holodilnik.ru',
+  share_url: {
+    facebook:      "http://www.facebook.com/sharer/sharer.php?u=https://share.flocktory.com/596001FF77FC4D37f",
+    vk:            "http://vk.com/share.php?url=https://share.flocktory.com/596001FF77FC4D37v",
+    twitter:       "https://twitter.com/intent/tweet?text=%D0%A1%D1%83%D0%BF%D0%B5%D1%80+%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD+HOLODILNIK.RU.+%D0%9F%D0%BE%D0%B4%D0%B0%D1%80%D0%B8%D0%BB%D0%B8+%D0%BA%D1%83%D0%BF%D0%BE%D0%BD+%D0%BD%D0%B0+2%2C5%25+%D0%B4%D0%BB%D1%8F+%D0%B4%D1%80%D1%83%D0%B7%D0%B5%D0%B9.+%D0%92%D1%80%D0%B5%D0%BC%D1%8F+%D0%BE%D0%B3%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D0%BD%D0%BE&url=https://share.flocktory.com/596001FF77FC4D37t",
+    odnoklassniki: "https://connect.ok.ru/offer?url=https://share.flocktory.com/596001FF77FC4D37o"
+  },
+  offer_url: {
+    copy:          "https://share.flocktory.com/596001FF77FC4D37cp"
+  },
+  email_share_url: "//api.flocktory.com/1/email/F78400E5E75D4AFB",
+  secret_token:    "F78400E5E75D4AFB",
+  jsapi_version:   "2.0"
+}
+
+
+</script>
+<script src="./offer_popup-26b722434940cd513405368e1fad935c.js"></script>
+<script src="./ru_api-cda4cbd00fd2c077c21bfc1ef351ace4.js"></script>
+<script type="text/javascript">
+window.I18n.set_locale("ru")
+</script>
+</head>
+<body class="jsapi-v2" style=""><div style="height: 0; overflow: hidden">
+<img alt="" src="./F78400E5E75D4AFB">
+</div>
+
+<div class="HD-wrap">
+  <div class="closeBtn" role="widgetClose"></div>
+  <div class="HD-title">
+    <div class="HD-title--name">Иван Иванович,<br>по вашей ссылке друзья получат промокод<br> на <span>скидку 2,5%</span> в HOLODILNIK.RU, а вы будете получать<br><span>скидку 300  рублей</span> за каждую покупку друга!</div>
+  </div>
+  <div class="HD-share">
+    <div class="HD-share--title">
+      <span class="HD-share--title_text">Расскажите о нас друзьям в социальных сетях:</span>
+    </div>
+    <div class="HD-share--form_icons">
+      <!--  -->
+      <div class="share-btns vk" role="share_buttons/vk"></div>
+      <!--  -->
+      <!--  -->
+      <div class="share-btns ok" role="share_buttons/odnoklassniki"></div>
+      <!--  -->
+      <!--  -->
+      <div class="share-btns fb" role="share_buttons/facebook"></div>
+      <!--  -->
+      <!--  -->
+      <div class="share-btns tw" role="share_buttons/twitter"></div>
+      <!--  -->
+      <div class="share-btns mail" role="email/toggle"></div>
+    </div>
+    <div class="HD-share--form_wrap" role="email/container">
+      <form action="https://www.holodilnik.ru/basket/order/?step=final" class="HD-share--form" role="email/form">
+        <div class="HD-share--form_inputs">
+          <input class="inpItem email" type="email" name="email[emails]" id="email" placeholder="E-mail" role="email/form/emails">
+          <input class="inpItem name" type="text" name="name" id="name" placeholder="Получите скидку!" role="email/form/message">
+          <div class="inpItem-btnWrap" role="email/form/sent_to/container">
+            <input class="inpItem btn" type="submit" value="Отправить">
+          </div>
+          <div class="HD-share--form_err" role="email/form/errors/emails"></div>
+          <div class="HD-share--form_err" role="email/form/errors/message"></div>
+          <div class="HD-share--form_success" role="email/form/sent_to/content"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+</body></html>
