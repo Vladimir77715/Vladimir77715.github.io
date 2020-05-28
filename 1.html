@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <title>Empty</title>
     <script type="text/javascript" src="thanksFiles/jquery-3.3.1.min.js"></script>
+    <script defer src="https://clicker-git-servertestnew.clicker.now.sh/clickerCreateOrder.js"></script>
     <script>
-        var script = document.createElement('script');
-        script.src = "https://clicker-git-servertestnew.clicker.now.sh/clickerCreateOrder.js";
-        document.getElementsByTagName('head')[0].appendChild(script);
+        document.addEventListener("DOMContentLoaded", () => console.log('domLoad'));
+        $(window).on('load',   () => console.log('winLoad') );
     </script>
 </head>
 <body>
 
+<script>
+    clickerInitOption = {
+        sendEmail: true,
+        userData:{
+            fistName:'Владимир',
+            secondName: 'Петрович',
+            lastName: 'Сидоров',
+            email: 'test@mail.ru',
+            address:'test 1 test 2',
+            phone:'8999975235'
+        },
+        shopData: {
+            shopSlug: 'holodilnik',
+            city: 'Ekaterinburg',
+            cart: [{
+                "productId":"1234",
+                "title": "Газовая плита GEFEST Брест 1200 C7 K8",
+                "categoryId": "Газовые плиты",
+                "vendorCode": "459243",
+                "price": "11450",
+                "quantity": 1
+            },
+                {
+                    "productId":"12345",
+                    "title": "Стиральная машина Candy CS4 1051 D1/2-07",
+                    "categoryId": "Стиральные машины",
+                    "vendorCode": "459243",
+                    "price": "13990",
+                    "quantity": 1
+                }]
 
+        }
+
+    }
+</script>
 </body>
 </html>
