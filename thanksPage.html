@@ -1323,34 +1323,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Clicker Counter trackOrderThankyou-->
     <script>
+        let cart =  [{
+            "productId":"1234",
+            "title": "Газовая плита GEFEST Брест 1200 C7 K8",
+            "categoryId": "Газовые плиты",
+            "vendorCode": "459243",
+            "price": "11450",
+            "quantity": 1
+        },
+            {
+                "productId":"12345",
+                "title": "Стиральная машина Candy CS4 1051 D1/2-07",
+                "categoryId": "Стиральные машины",
+                "vendorCode": "459243",
+                "price": "13990",
+                "quantity": 1
+            }]
+        let clickerMatchById = (productId) => {
+            return cart.find((item) => item.productId === productId )
+        }
+
         clickerInitOption = {
-            sendEmail: false,
             userData:{
                 fistName:'Владимир',
                 secondName: 'Петрович',
                 lastName: 'Сидоров',
+                email: 'test@mail.ru',
+                address:'test 1 test 2',
+                phone:'8999975235'
             },
             shopData: {
                 shopSlug: 'holodilnik',
                 city: 'Ekaterinburg',
-                cart: [{
-                    "productId":"1234",
-                    "title": "Газовая плита GEFEST Брест 1200 C7 K8",
-                    "categoryId": "Газовые плиты",
-                    "vendorCode": "459243",
-                    "price": "11450",
-                    "quantity": 1
+                clickerServiceCallback : (getClickerProductsId) => {
+                    let clickerProductIdArray = getClickerProductsId();
+                    let clickerProductsSorted = [];
+                    clickerProductIdArray.forEach(item => {
+                        clickerProductsSorted.push(clickerMatchById(item) );
+                    })
+                    return clickerProductsSorted;
                 },
-                    {
-                        "productId":"12345",
-                        "title": "Стиральная машина Candy CS4 1051 D1/2-07",
-                        "categoryId": "Стиральные машины",
-                        "vendorCode": "459243",
-                        "price": "13990",
-                        "quantity": 1
-                    }]
-
-            }
+                clickerSendEmailCallback(matchId,sendEmail) {
+                    if (!matchId().length) {
+                        sendEmail(cart);
+                    }
+                    return [];
+                }
+            },
 
         }
     </script>
