@@ -1339,33 +1339,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 "price": "13990",
                 "quantity": 1
             }]
-        let clickerMatchById = (productId) => {
-            return cart.find((item) => item.productId === productId )
-        }
-
+        localStorage.setItem('clickerServiceStorage','[["12345",true]]');
         clickerInitOption = {
             userData:{
                 fistName:'Владимир',
                 middleName: 'Петрович',
-                lastName: 'Сидоров'
+                lastName: 'Сидоров',
+                email: 'test@mail.ru',
+                address:'test 1 test 2',
+                phone:'8999975235'
             },
             shopData: {
                 shopSlug: 'holodilnik',
                 city: 'Ekaterinburg',
-                clickerServiceCallback : (getClickerProductsId) => {
-                    let clickerProductIdArray = getClickerProductsId();
-                    let clickerProductsSorted = [];
-                    clickerProductIdArray.forEach(item => {
-                        clickerProductsSorted.push(clickerMatchById(item) );
-                    })
-                    return clickerProductsSorted;
-                },
-                clickerSendEmailCallback(matchId,sendEmail) {
-                    if (!matchId().length) {
-                        sendEmail(cart);
-                    }
-                    return [];
-                }
+                clickerServiceExistCallback : () =>  cart ,
+                clickerServiceNotExistCallback: (sendEmail) => sendEmail(cart)
             },
 
         }
