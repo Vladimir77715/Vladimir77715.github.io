@@ -875,6 +875,12 @@ var crel = createCommonjsModule(function (module, exports) {
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
+          @media (max-width: 583px) {
+          
+            .clicker-modal-content {
+              margin: 0!important;
+            }
+          }
 
         /* Mod/al Content */
         .clicker-modal-content {
