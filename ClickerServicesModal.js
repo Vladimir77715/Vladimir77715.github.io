@@ -866,7 +866,7 @@ var crel = createCommonjsModule(function (module, exports) {
             align-self: center;
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            z-index: 999999; /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -2431,6 +2431,8 @@ font-weight: 300;
         _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
       })
       $(window).on('click', (event) => {
+        console.log($(event.target).attr('id'));
+        console.log($(offer.attr('id')).attr('id'));
         if ($(event.target).attr('id') === _service.attr('id')) {
           _service.css('display', 'none');
           _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
