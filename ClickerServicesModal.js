@@ -2410,7 +2410,7 @@ font-weight: 300;
         offer.css('display', 'none');
         offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
       })
-      $(window).on('click', (event) => {
+      $(window).on('mousedown', (event) => {
         console.log($(event.target).attr('id'));
         console.log($(offer.attr('id')).attr('id'));
           if ($(event.target).attr('id') === offer.attr('id')) {
@@ -2430,7 +2430,7 @@ font-weight: 300;
         _service.css('display', 'none');
         _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
       })
-      $(window).on('click', (event) => {
+      $(window).on('mousedown', (event) => {
         console.log($(event.target).attr('id'));
         console.log($(offer.attr('id')).attr('id'));
         if ($(event.target).attr('id') === _service.attr('id')) {
