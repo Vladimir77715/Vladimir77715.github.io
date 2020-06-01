@@ -869,7 +869,7 @@ var crel = createCommonjsModule(function (module, exports) {
             z-index: 999999; /* Sit on top */
             left: 0;
             top: 0;
-            width: 105%;
+            width: 100%;
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
@@ -2118,6 +2118,7 @@ font-weight: 300;
     };
 
     modalWindow.on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_OPEN, () => {
+      $(document.body).css('overflow','hidden');
       let reviewText = $('.clicker-service-review-text-short');
       $(window).on('resize',risizeable)
       $('.clicker-service-another-review >cp').on('click', anotherReview);
@@ -2240,11 +2241,15 @@ font-weight: 300;
         if ((pageDataController !== null || undefined) && typeof pageDataController === "function")
           var localData = pageDataController(local);
           let f = () => {
+            $(document.body).css('overflow','auto');
             addServiceHandler(localData.productId);
           }
         $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, f)
         $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE,
-          () => $('#clicker-service-modal').off(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, f)
+          () => {
+            $(document.body).css('overflow','auto');
+            $('#clicker-service-modal').off(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, f)
+          }
         )
       }};
   /*******************/
