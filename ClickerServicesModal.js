@@ -104,10 +104,10 @@ var crel = createCommonjsModule(function (module, exports) {
 
   let CLICKER_MODAL_EVENTS ={
     CLICKER_SERVICE_OPEN:'CLICKER_SERVICE_OPEN',
+    CLICKER_SERVICE_ADD:'CLICKER_SERVICE_ADD',
     CLICKER_SERVICE_CLOSE:'CLICKER_SERVICE_CLOSE',
-    CLICKER_SERVICE_CLOSE_FORCE:'CLICKER_SERVICE_CLOSE_FORCE',
-    CLICKER_OFFER_CLOSE:'CLICKER_OFFER_CLOSE',
-    CLICKER_OFFER_CLOSE_FORCE: 'CLICKER_OFFER_CLOSE_FORCE',
+    CLICKER_OFFER_ADD:'CLICKER_OFFER_ADD',
+    CLICKER_OFFER_CLOSE: 'CLICKER_OFFER_CLOSE',
     CLICKER_OFFER_OPEN: 'CLICKER_OFFER_OPEN'
 
   }
@@ -1726,9 +1726,9 @@ font-weight: 300;
       let f = () => {
         addServiceHandler(localData.productId)
       }
-      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f);
-      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE,
-        () => $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f));
+      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_ADD, f);
+      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE,
+        () => $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_ADD, f));
       return (() => {
       })()
     }
@@ -2128,7 +2128,7 @@ font-weight: 300;
       shadowController();
     })
 
-    modalWindow.on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, () => {
+    modalWindow.on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD, () => {
       let reviewText = $('.clicker-service-review-text-short');
       $(window).off('resize',risizeable);
       reviewText.off('click', textAccordion);
@@ -2191,7 +2191,7 @@ font-weight: 300;
     return () => {
 
       let clickerServiceStorage = new Map(JSON.parse(localStorage.getItem('clickerServiceStorage')));
-      console.log(clickerServiceStorage.has(id))
+      (clickerServiceStorage.has(id))
       checkBox.prop('checked', !!clickerServiceStorage.has(id));
       $checkBox.prop('checked') ? tip.fadeIn(0)
         : tip.fadeOut(0);
@@ -2217,7 +2217,7 @@ font-weight: 300;
     const local = productId;
     const tip = $tip;
     return () => {
-      console.log('chaange');
+      ('chaange');
       if ((shortPageDataController !== null || undefined) && typeof shortPageDataController === "function")
         shortPageDataController(local);
 
@@ -2244,11 +2244,11 @@ font-weight: 300;
             $(document.body).css('overflow','auto');
             addServiceHandler(localData.productId);
           }
-        $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, f)
-        $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE,
+        $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD, f)
+        $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE,
           () => {
             $(document.body).css('overflow','auto');
-            $('#clicker-service-modal').off(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, f)
+            $('#clicker-service-modal').off(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD, f)
           }
         )
       }};
@@ -2376,7 +2376,7 @@ font-weight: 300;
     shortPageDataController = createShortModal(clickerContainer,offerLink,  offerHandle , '');
     pageDataController = createFullModal (clickerContainer,{title:'', price:'0', description:'',
       includedWorks:[], notIncludedWorks:[]}  , offerHandle, '', clickerInitOption.modalPosition, offerLink)
-    console.log(pageDataController)
+    (pageDataController)
     // инициалищируем анимацию для модальных окон
     initAnimation($('#clicker-service-modal'), reviews);
 
@@ -2402,9 +2402,9 @@ font-weight: 300;
 
       // вешаем хендлеры на различные события
       // $('.clicker-modal').on(
-      //   CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, checkHandle(productId, $checkBox, $tip));
-      $('#offerModal').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE,  (checkHandle(productId, $checkBox, $tip)) );
-      $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, () => setTimeout( checkHandle(productId, $checkBox, $tip),10 ));
+      //   CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD, checkHandle(productId, $checkBox, $tip));
+      $('#offerModal').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE,  (checkHandle(productId, $checkBox, $tip)) );
+      $('#clicker-service-modal').on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD, () => setTimeout( checkHandle(productId, $checkBox, $tip),10 ));
       $checkBox.on('change', checkBoxChangeHandler(productId, $checkBox, $tip ) );
       $span.on('click', spanClickHandler(productId));
 
@@ -2415,18 +2415,18 @@ font-weight: 300;
       let offer =  $('#offerModal');
       $('#clicker-offer-accept').on('click', () => {
         offer.css('display', 'none');
-        offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE);
+        offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_ADD);
       })
       $('#clicker-offer-exit').on('click', () => {
         offer.css('display', 'none');
-        offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
+        offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE);
       })
       $(window).on('mousedown', (event) => {
-        console.log($(event.target).attr('id'));
-        console.log($(offer.attr('id')).attr('id'));
+        ($(event.target).attr('id'));
+        ($(offer.attr('id')).attr('id'));
           if ($(event.target).attr('id') === offer.attr('id')) {
             offer.css('display', 'none');
-            offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
+            offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE);
           }
       })
 
@@ -2435,18 +2435,18 @@ font-weight: 300;
       let _service =  $('#clicker-service-modal');
       $('#clicker-service-add-btn').on('click', (event) => {
         _service.css('display', 'none');
-        _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE);
+        _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_ADD);
       })
       $('#clicker-service-exit').on('click', (event) => {
         _service.css('display', 'none');
-        _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
+        _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE);
       })
       $(window).on('mousedown', (event) => {
-        console.log($(event.target).attr('id'));
-        console.log($(offer.attr('id')).attr('id'));
+        ($(event.target).attr('id'));
+        ($(offer.attr('id')).attr('id'));
         if ($(event.target).attr('id') === _service.attr('id')) {
           _service.css('display', 'none');
-          _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
+          _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE);
         }
       })
 
