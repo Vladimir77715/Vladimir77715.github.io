@@ -2411,6 +2411,8 @@ font-weight: 300;
         offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
       })
       $(window).on('click', (event) => {
+        console.log($(event.target).attr('id'));
+        console.log($(offer.attr('id')).attr('id'));
           if ($(event.target).attr('id') === offer.attr('id')) {
             offer.css('display', 'none');
             offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
