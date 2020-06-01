@@ -869,7 +869,7 @@ var crel = createCommonjsModule(function (module, exports) {
             z-index: 999999; /* Sit on top */
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
+            width: 105%;
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
