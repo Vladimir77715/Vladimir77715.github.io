@@ -881,7 +881,8 @@ var crel = createCommonjsModule(function (module, exports) {
            outline: none;        
         }
         .clicker-modal * {
-            border: 0;     
+            border: 0;    
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
         }
         
         /* Mod/al Content */
