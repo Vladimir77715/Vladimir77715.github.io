@@ -1303,6 +1303,9 @@ font-weight: 300;
     cursor: pointer;
 }
 
+.clicker-service-works-icons-wrapper:focus {
+  outline: none;
+}
 .clicker-service-works-icons-wrapper:hover  {
      color: #B4DCFF;
 }
@@ -1779,7 +1782,7 @@ font-weight: 300;
       },
       {
         src: CLICKER_URL + "about/quality.png",
-        title: "Гарантия качества",
+        title: "Гарантия -1 год",
         description: "Если что-то пойдет не так — переделаем работу с другой компанией или вернем деньги"
       },
       {
@@ -1793,9 +1796,9 @@ font-weight: 300;
         description: "Мастер приедет в назначенное время и не будет лишний раз вам звонить"
       },
       {
-        src: CLICKER_URL + "about/connected.png",
-        title: "Мы на связи",
-        description: "По любым вопросам с 9 до 22 в чате или по телефону"
+        src: CLICKER_URL + "about/briefcase.png",
+        title: "Возьмем расходники",
+        description: "Предупредите, еслинужен дополнительный кран или шланг - возьмем с собой"
       },
     ];
 
@@ -2190,7 +2193,7 @@ font-weight: 300;
       servicesDataMap.set(productId, service )
       let {$element, $p} = elements;
       $element.css('visibility', 'visible')
-      $p.text( "  " + ( (price * quantity) / price) + '.шт - ' + (price * quantity) + ' руб. ')
+      $p.text( "  " + ( (price * quantity) / price) + 'шт. - ' + (price * quantity) + ' руб. ')
 
   }
 
