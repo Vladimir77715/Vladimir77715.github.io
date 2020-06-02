@@ -112,7 +112,7 @@ var crel = createCommonjsModule(function (module, exports) {
 
   }
 
-  let CLICKER_URL = 'https://clicker-git-servertestnew.clicker.now.sh/';
+  let CLICKER_URL = 'https://clicker-git-newmodal.clicker.now.sh/';
 
 //Экранируем стили
 
@@ -875,13 +875,14 @@ var crel = createCommonjsModule(function (module, exports) {
             background-color: rgb(0,0,0); /* Fallback color */
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
         }
-          @media (max-width: 583px) {
-          
-            .clicker-modal-content {
-              margin: 0!important;
-            }
-          }
-
+        
+        .clicker-modal *:focus {
+           outline: none;        
+        }
+        .clicker-modal * {
+            border: 0;     
+        }
+        
         /* Mod/al Content */
         .clicker-modal-content {
             height: max-content;
@@ -925,12 +926,14 @@ var crel = createCommonjsModule(function (module, exports) {
           margin-bottom: 4%!important;
           margin: 0;
       }
-      #clicker-offer-accept-mobile {
+      .clicker-offer-accept-mobile, .clicker-offer-modal-decorator-mobile{
+        width: auto!important;
+      }
+      .clicker-offer-accept-mobile {
           margin-left: 5%;
           margin-right: 5%;
-          width: auto!important;
       }
-        #clicker-offer-accept-mobile >cp{
+        .clicker-offer-accept-mobile >cp{
           width: auto!important;
       }
   }
@@ -1010,7 +1013,6 @@ font-weight: 300;
     background: #0A1AC4;
 }
 #clicker-offer-accept > cp{
-    width: 275px!important;
     height: 31px!important;
     left: 256px!important;
     top: 3735px!important;
@@ -1059,6 +1061,10 @@ font-weight: 300;
                 .clicker-service-add-btn_m, .clicker-service-add-btn_m > cp, .clicker-footer-header-mobile,
                  .clicker-service-wrapper-mobile , .clicker-service-footer-text-header-mobile , .clicker-modal-dialog-mobile{
                width: auto!important;
+            }
+            
+            .clicker-service-modal-decorator-mobile{
+              margin:0!important;
             }
             
             .clicker-service-footer-container-mobile, .clicker-footer-header-mobile ,
@@ -1350,6 +1356,7 @@ font-weight: 300;
 
 .clicker-service-review-text {
     width: 355px;
+    cursor: pointer;
     font-style: italic;
     font-weight: normal;
     font-size: 15px;
@@ -1686,15 +1693,15 @@ font-weight: 300;
     const modalContent = (classes) => crel('cdiv', { class: "clicker-modal-content " + classes });
 
     const offerModal = crel(modalWindow("offerModal"),
-        crel(modalContent("clicker-offer-modal-decorator"),
-          crel('cdiv', { class: "clicker-offer-exit-wrapper clicker-offer-exit-wrapper-mobile", 'data-dismiss': "modal" },
+        crel(modalContent("clicker-offer-modal-decorator clicker-offer-modal-decorator-mobile"),
+          crel('cdiv', { class: "clicker-offer-exit-wrapper clicker-offer-exit-wrapper-mobile" },
             crel('cdiv', { class: " clicker-offer-modal-close", id:'clicker-offer-exit' }, "+")
           ),
           crel('cdiv', { class: "modal-body clicker-offer-modal-body" },
             crel('cdiv', { class: "offer-mobile-wrapper" },
               crel('cdiv', { class: "clicker-offer-modal-container" },
                 crel('cdiv', { class: "clicker-offer-container"  },
-                  crel('cdiv', { class: "clicker-offer-accept-mobile ", id: 'clicker-offer-accept'},
+                  crel('cdiv', { class: "clicker-offer-accept-mobile", id: 'clicker-offer-accept'},
                     crel('cp', { class: "accept-text" },
                       "Добавить к заказу"
                     )
@@ -1899,7 +1906,7 @@ font-weight: 300;
         crel('cdiv', { class: 'clicker-service-wrapper-footer-icons clicker-service-wrapper-footer-icons-mobile' },
           crel('cdiv', { class: 'clicker-service-footer-icon clicker-service-footer-icon-modal' },
             crel('cdiv', { id: 'clicker-service-footer-image-1' },
-              crel('a', { href: "/" },
+              crel('a', { href: "tg://resolve?domain=clicker_support_bot" },
                 crel('img', {
                   class: 'clicker-service-footer-image-mobile',
                   src: "https://img.icons8.com/color/63/000000/telegram-app.png"
@@ -1907,7 +1914,7 @@ font-weight: 300;
               )),
 
             crel('cdiv', { id: 'clicker-service-footer-image-2' },
-              crel('a', { href: "/" },
+              crel('a', { href: "https://wa.me/74993221977" },
                 crel('img', {
                   class: 'clicker-service-footer-image-mobile',
                   src: "https://img.icons8.com/color/63/000000/whatsapp.png"
@@ -1959,22 +1966,22 @@ font-weight: 300;
           )
         )
     );
-
-
-
     crel(container, style, fullModal);
     $('#clicker-service-add-btn').on('click', handleOffer);
+
     return (pageData) => {
-
       let localData = servicesDataMap.get(pageData);
-
       (() => {
         let container = $('.clicker-service-title-block')
         container.empty();
+
+        // проверяем есть у нас title для модального окна если нет то используем заголовок
+        let title = !!localData.titleModal ? localData.titleModal : localData.title;
         container.append(
-          serviceHeader(localData.title, localData.price),
+          serviceHeader(title, localData.price),
           serviceWorks(localData.description, localData.includedWorks, localData.notIncludedWorks)
         )
+        console.log(localData);
         showFullHandle()
       })()
       return localData
@@ -1989,7 +1996,7 @@ font-weight: 300;
   let pageDataController = null;
   let shortPageDataController = null;
   //*****Сетевые запросы *****//
-  const CLICKER_API = 'https://clicker-git-servertestnew.clicker.now.sh/api/';
+  const CLICKER_API = 'https://clicker-git-newmodal.clicker.now.sh/api/';
 
   const getRequest = (queryParams, url, data) => {
     return $.ajax({
@@ -2119,7 +2126,7 @@ font-weight: 300;
 
     modalWindow.on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_OPEN, () => {
       $(document.body).css('overflow','hidden');
-      let reviewText = $('.clicker-service-review-text-short');
+      let reviewText = $('.clicker-service-review-text');
       $(window).on('resize',risizeable)
       $('.clicker-service-another-review >cp').on('click', anotherReview);
       accordionFunction('#service-include-works',1);
@@ -2129,7 +2136,7 @@ font-weight: 300;
     })
 
     modalWindow.on(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE, () => {
-      let reviewText = $('.clicker-service-review-text-short');
+      let reviewText = $('.clicker-service-review-text');
       $(window).off('resize',risizeable);
       reviewText.off('click', textAccordion);
       $('.clicker-service-another-review >cp').off('click', anotherReview);
@@ -2173,6 +2180,7 @@ font-weight: 300;
   }
 
   let fillServiceData = (service , elements) => {
+     console.log(service)
       let {productId, title ,titleModal, includedWorks, notIncludedWorks, price, quantity } = service
       service.title = titleModal ? titleModal : title;
       service.includedWorks = typeof includedWorks === "string" ? includedWorks.match(serviceRegExp) : [''];
@@ -2376,7 +2384,6 @@ font-weight: 300;
     shortPageDataController = createShortModal(clickerContainer,offerLink,  offerHandle , '');
     pageDataController = createFullModal (clickerContainer,{title:'', price:'0', description:'',
       includedWorks:[], notIncludedWorks:[]}  , offerHandle, '', clickerInitOption.modalPosition, offerLink)
-    console.log(pageDataController)
     // инициалищируем анимацию для модальных окон
     initAnimation($('#clicker-service-modal'), reviews);
 
@@ -2408,8 +2415,6 @@ font-weight: 300;
       $checkBox.on('change', checkBoxChangeHandler(productId, $checkBox, $tip ) );
       $span.on('click', spanClickHandler(productId));
 
-
-      //clicker-service-modal
       //события для модального окна с офертой
       // события закрытия
       let offer =  $('#offerModal');
@@ -2442,13 +2447,12 @@ font-weight: 300;
         _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
       })
       $(window).on('mousedown', (event) => {
-        console.log($(event.target).attr('id'));
-        console.log($(offer.attr('id')).attr('id'));
         if ($(event.target).attr('id') === _service.attr('id')) {
           _service.css('display', 'none');
           _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
         }
       })
+
 
       // заполняем данные для модальных окон
       fillServiceData(service, {$element, $p})
