@@ -112,9 +112,210 @@ var crel = createCommonjsModule(function (module, exports) {
 
   }
 
-  let CLICKER_URL = 'https://clicker-git-newmodal.clicker.now.sh/';
+  let CLICKER_URL = 'https://app.clicker.one/';
 
 //Экранируем стили
+
+
+  let styleResolver = (className, {background = null , color = null , hover = null , fill = null, borderColor = null , shadow = {fColor: null, sColor: null}  }) => {
+    let jstColor = `${className}  {
+          -webkit-text-fill-color: ${color}!important;
+          color: ${color}!important;
+        }
+           ${className} svg {
+          -webkit-text-fill-color: ${color}!important;
+          color: ${color}!important;}
+        `;
+    let hvr = `${className}:hover  {
+          -webkit-text-fill-color: ${hover}!important;
+          color: ${hover}!important;
+          
+        }
+        ${className}:hover svg {
+          -webkit-text-fill-color: ${hover}!important;
+          color: ${hover}!important;}
+        `;
+    let bck = `${className}  {
+          background-color: ${background}!important;
+        }`;
+    let bckHvr = `${className}:hover  {
+          background-color: ${hover}!important;
+        }`;
+    let svg = `${className} path {
+          fill: ${fill}!important;
+        }`;
+    let border = `${className}  {
+          border-color: ${borderColor}!important;
+        }`;
+    let sdw = `${className}  { 
+             background: linear-gradient( 0deg, ${shadow.fColor} 39%, rgba(255,255,255,0) 100% );
+        }`;
+    if(typeof shadow !== "undefined" && !!shadow && !!shadow.fColor) {
+      return () => {
+       return  sdw;
+      }
+    }
+
+    if(!!fill) {
+      return () =>
+        svg
+    }
+
+    // имеем дело со стилем , который меняет свое состояние при наведении
+    if(!!background && !!hover) {
+      return () =>
+        bck + '\n'+ bckHvr
+    }
+
+    if(!!color && !!hover) {
+      return () =>
+        jstColor + '\n'+ hvr
+    }
+    if(!!background) {
+      return () =>
+        bck
+    }
+    if(!!color) {
+      return () =>
+        jstColor
+    }
+    if(!!borderColor) {
+      return () =>
+        border
+    }
+    return () => '';
+  }
+
+
+  let modalScheme = new Map([
+    ['topBlockC',
+      (background) =>
+        styleResolver('.clicker-top-block-themed',{background})],
+    ['exitC',
+      (color, hover) =>
+        styleResolver('.clicker-exit-themed',{color,hover}) ],
+    ['serviceNameC',
+      (color) =>
+        styleResolver('.clicker-service-name-themed',{color}) ],
+    ['priceC',
+      (color) =>
+        styleResolver('.clicker-price-themed',{color}) ],
+    ['serviceDescriptionС',
+      (color) =>
+        styleResolver('.clicker-service-description-themed',{color}) ],
+    ['serviceListTitleC',
+      (color,hover) =>
+        styleResolver('.clicker-service-list-title-themed',{color,hover}) ],
+    ['servicesListC',
+      (color) =>
+        styleResolver('.clicker-service-list-themed',{color}) ],
+    ['reviewsBorderС',
+      (borderColor) =>
+        styleResolver('.clicker-reviews-border-themed',{borderColor}) ],
+    ['reviewStarsС',
+      (fill) =>
+        styleResolver('.clicker-reviews-stars-themed',{fill}) ],
+    ['reviewTextC',
+      (color) =>
+        styleResolver('.clicker-reviews-text-themed',{color}) ],
+    ['reviewTextShadowC',
+      (fColor) =>
+        styleResolver('.clicker-reviews-text-shadow-themed',{shadow: {fColor} }) ],
+    ['reviewNext',
+      (color, hover) =>
+        styleResolver('.clicker-reviews-next-themed',{color,hover}) ],
+    ['middleBlockC',
+      (background) =>
+        styleResolver('.clicker-middle-block-themed',{background}) ],
+    ['aboutTitleC',
+      (color) =>
+        styleResolver('.clicker-about-title-themed',{color}) ],
+    ['aboutDescribeC',
+      (color) =>
+        styleResolver('.clicker-about-describe-themed',{color}) ],
+    ['advantageC',
+      (color) =>
+        styleResolver('.clicker-advantage-themed',{color}) ],
+    ['addServiceC',
+      (background, hover) =>
+        styleResolver('.clicker-add-service-themed',{background,hover}) ],
+    ['addServiceTextC',
+      (color) =>
+        styleResolver('.clicker-add-service-text-themed',{color}) ],
+    ['offerTextC',
+      (color) =>
+        styleResolver('.clicker-offer-text-themed',{color}) ],
+    ['confidentialLinkC',
+      (color) =>
+        styleResolver('.clicker-confidential-link-themed',{color}) ],
+    ['offerLinkC',
+      (color) =>
+        styleResolver('.clicker-offer-link-themed',{color}) ],
+    ['footerBlockC',
+      (background) =>
+        styleResolver('.clicker-footer-block-themed',{background}) ],
+    ['footerTitleC',
+      (color) =>
+        styleResolver('.clicker-footer-title-themed',{color}) ],
+    ['telephoneC',
+      (color) =>
+        styleResolver('.clicker-telephone-themed',{color}) ]
+  ])
+
+
+  let offerScheme = new Map([
+    ['offerBlockC',
+      (background) =>
+        styleResolver('.clicker-offer-window-block-themed',{background})],
+    ['exitC',
+      (color, hover) =>
+        styleResolver('.clicker-offer-window-exit-themed',{color,hover}) ],
+    ['addServiceC',
+      (background, hover) =>
+        styleResolver('.clicker-offer-window-add-service-themed',{background, hover}) ],
+    ['addServiceTextC',
+      (color) =>
+        styleResolver('.clicker-offer-window-add-service-text-themed',{color}) ],
+    ['offerTextC',
+      (color) =>
+        styleResolver('.clicker-offer-window-offer-text-themed',{color}) ],
+    ['confidentialLinkC',
+      (color) =>
+        styleResolver('.clicker-offer-window-confidential-link-themed',{color}) ],
+    ['offerLinkC',
+      (color) =>
+        styleResolver('.clicker-offer-window-offer-link-themed',{color}) ]
+  ])
+
+
+
+  let validateTheme = (theme) => {
+    return typeof theme !== "undefined" && !!theme
+      && typeof theme.colors !== "undefined"
+      && typeof !!theme.colors && Array.isArray(theme.colors)
+      && theme.colors.length
+      && typeof Array.isArray(theme.components)
+      && theme.components.length
+  }
+
+  let applyTheme  = (theme = null, scheme) => {
+    let result = '';
+    !!theme && theme.forEach(value => {
+      if(validateTheme(value)) {
+        let colors = value.colors;
+        value.components.forEach(style => {
+            if(scheme.has(style)) {
+              let repaintFunct = scheme.get(style);
+              let [fColor, sColor] = colors;
+
+
+              result += (repaintFunct(fColor, sColor)()) + '\n'
+            }
+        })
+      }
+    })
+    return result;
+  }
 
   let clickerContainerStyle = `
         .clicker-container {
@@ -1023,7 +1224,7 @@ font-weight: 300;
     font-size: 23px!important;
     line-height: 28px!important;
     text-align: center!important;
-    color: rgb(255, 255, 255)!important;
+    color: rgb(255, 255, 255);
     padding-top: 21px!important;
     user-select: none!important;
     cursor: pointer!important;
@@ -1180,6 +1381,7 @@ font-weight: 300;
    margin: 0px;
 }
 
+
 #clicker-service-exit {
     font-weight: 300;
     width: 44.13px;
@@ -1196,6 +1398,7 @@ font-weight: 300;
 #clicker-service-exit:hover {
     color: black;
 }
+
 
 .clicker-service-wrapper {
     width: 524px;
@@ -1231,8 +1434,8 @@ font-weight: 300;
 
 .clicker-service-price {
    font-weight: normal;
-   opacity: 0.52;
    white-space: nowrap;
+   color: lightgray
 }
 
 .clicker-service-price-icon {
@@ -1241,6 +1444,7 @@ font-weight: 300;
 
 .clicker-service-list-wrap {
 }
+
 
 .clicker-service-description {
    font-size: 18px;
@@ -1686,6 +1890,8 @@ font-weight: 300;
   let fontsEl = crel('style', {}, fonts);
   let shortStyleEl = crel('style', {}, shortStyle);
   let fullStyleEl = crel('style', {}, fullModalStyle);
+  let styledModalEL = crel('style', {} , applyTheme(clickerInitOption.modalTheme,modalScheme));
+  let styledOfferModalEL = crel('style', {} , applyTheme(clickerInitOption.offerModalTheme,offerScheme));
 
   // Версия окна с офертой и добавлением услуги
   let createShortModal = (container, offerLink, handleOffer , style) => {
@@ -1699,28 +1905,24 @@ font-weight: 300;
 
     const offerModal = crel(modalWindow("offerModal"),
         crel(modalContent("clicker-offer-modal-decorator clicker-offer-modal-decorator-mobile"),
-          crel('cdiv', { class: "clicker-offer-exit-wrapper clicker-offer-exit-wrapper-mobile" },
-            crel('cdiv', { class: " clicker-offer-modal-close", id:'clicker-offer-exit' }, "+")
+          crel('cdiv', { class: "clicker-offer-window-block-themed clicker-offer-exit-wrapper clicker-offer-exit-wrapper-mobile" },
+            crel('cdiv', { class: "clicker-offer-window-exit-themed clicker-offer-modal-close", id:'clicker-offer-exit' }, "+")
           ),
           crel('cdiv', { class: "modal-body clicker-offer-modal-body" },
             crel('cdiv', { class: "offer-mobile-wrapper" },
-              crel('cdiv', { class: "clicker-offer-modal-container" },
+              crel('cdiv', { class: "clicker-offer-window-block-themed clicker-offer-modal-container" },
                 crel('cdiv', { class: "clicker-offer-container"  },
-                  crel('cdiv', { class: "clicker-offer-accept-mobile", id: 'clicker-offer-accept'},
-                    crel('cp', { class: "accept-text" },
+                  crel('cdiv', { class: "clicker-offer-window-add-service-themed clicker-offer-accept-mobile", id: 'clicker-offer-accept'},
+                    crel('cp', { class: "clicker-offer-window-add-service-text-themed accept-text" },
                       "Добавить к заказу"
                     )
                   ),
-
                   crel('cdiv', { class: "clicker-offer-message" },
-                    crel('cp', { class: "accept-text" },
-                      "Нажимая кнопку «Добавить к заказу», я даю согласие на обработку персональных данных," +
-                      "включая право поручения обработки другим лицам, на условиях, изложенных  в ",
-                      crel("a", { target:'_blank', href: "https://www.holodilnik.ru/defence/" }, 'Политике в отношении обработки персональных данных в Интернете'),
-                      " с которой я ознакомился, подтверждаю своё согласие с ",
-                      crel("a", { target:'_blank', href: "https://clicker.one/documents/privacy" }, 'политикой конфиденциальности'),
+                    crel('cp', { class: "clicker-offer-window-offer-text-themed accept-text" },
+                      "Нажимая кнопку «Добавить к заказу», я подтверждаю своё согласие с " ,
+                      crel("a", { class: 'clicker-offer-window-confidential-link-themed', target:'_blank', href: "https://clicker.one/documents/privacy" }, 'политикой конфиденциальности'),
                       " и принимаю условия ",
-                      crel("a", { target:'_blank', href: offerLink }, 'оферты'
+                      crel("a", { class:"clicker-offer-window-offer-link-themed", target:'_blank', href: offerLink }, 'оферты'
                       )
                     )
                   )
@@ -1738,9 +1940,9 @@ font-weight: 300;
       let f = () => {
         addServiceHandler(localData.productId)
       }
-      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f);
-      $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE,
-        () => $('#clicker-offer-accept').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f));
+      $('#offerModal').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f);
+      $('#offerModal').on(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE,
+        () =>$('#offerModal').off(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE, f));
       return (() => {
       })()
     }
@@ -1798,16 +2000,16 @@ font-weight: 300;
       {
         src: CLICKER_URL + "about/briefcase.png",
         title: "Возьмем расходники",
-        description: "Предупредите, еслинужен дополнительный кран или шланг - возьмем с собой"
+        description: "Предупредите, если понадобится дополнительный кран или шланг - возьмем с собой"
       },
     ];
 
-    const crossExit = crel('cdiv', { id: 'clicker-service-exit', class: " clicker-service-exit-mobile clicker-service-modal-close" }, "+");
+    const crossExit = crel('cdiv', { id: 'clicker-service-exit', class: "clicker-exit-themed clicker-service-exit-mobile clicker-service-modal-close" }, "+");
 
     const worksTitle = (id_title, id_icon, title) => {
-      let wrapper = crel('cdiv', { class: "clicker-service-works-icons-wrapper" });
+      let wrapper = crel('cdiv', { class: "clicker-service-list-title-themed clicker-service-works-icons-wrapper" });
       let icons = $(crel('cdiv', { class: "clicker-service-works-icons" }));
-      let _title = $(crel('span', { id: id_title, class: "clicker-service-title-wrap" }, title));
+      let _title = $(crel('span', { id: id_title, class: "clicker-service-list-title-themed clicker-service-title-wrap" }, title));
       icons.append('<svg stroke="currentColor" id="close_icon_' + id_icon + '" style=" padding-top: 2px;" fill="currentColor" class=" side_icon" stroke-width="0" viewBox="0 0 320 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg>');
       icons.append(' <svg stroke="currentColor" id ="open_icon_' + id_icon + '" class="side_icon clicker-unvisible-item" style="position: absolute;" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"></path></svg>');
       $(wrapper).append(icons, _title);
@@ -1815,11 +2017,11 @@ font-weight: 300;
     };
 
     const serviceHeader = (serviceName, price) =>
-      crel('ch3', { class: "clicker-service-title" },
+      crel('ch3', { class: "clicker-service-name-themed clicker-service-title" },
         serviceName + " ",
-        crel('span', { class: "clicker-service-price" },
+        crel('span', { class: "clicker-price-themed clicker-service-price" },
           price,
-          crel('span', { class: "clicker-service-price-icon" },
+          crel('span', { class: "clicker-price-themed clicker-service-price-icon" },
             ` ₽`
           )
         )
@@ -1833,14 +2035,14 @@ font-weight: 300;
     };
     const serviceWorks = (serviceDescription, includeWorks, notIncludeWorks) => {
       return crel('cdiv', { class: "clicker-service-list-wrap" },
-        crel('cdiv', { class: "clicker-service-description" },
+        crel('cdiv', { class: "clicker-service-description-themed clicker-service-description" },
           serviceDescription
         ),
-        crel('cdiv', { id: "service-include-works", class: "clicker-service-menu" },
+        crel('cdiv', { id: "service-include-works", class: "clicker-service-list-themed clicker-service-menu" },
           worksTitle("service-include-title", '1', "Работы, входящие в стоимость"),
           serviceList(includeWorks)
         ),
-        crel('cdiv', { id: "clicker-service-not-include-works", class: "clicker-service-menu" },
+        crel('cdiv', { id: "clicker-service-not-include-works", class: "clicker-service-list-themed clicker-service-menu" },
           worksTitle("service-not-include-title", '2', "Работы, не входящие в стоимость"),
           serviceList(notIncludeWorks)
         )
@@ -1849,13 +2051,13 @@ font-weight: 300;
 
 
     const starList = () => {
-      let list = crel('ctable', { class: "clicker-stars-block" });
+      let list = crel('ctable', { class: "clicker-top-block-themed clicker-stars-block" });
       return list;
     };
     const serviceReview = () =>
-      crel('cdiv', { class: "clicker-service-review-block clicker-service-review-block-mobile " },
+      crel('cdiv', { class: "clicker-reviews-border-themed clicker-service-review-block clicker-service-review-block-mobile " },
         starList(),
-        crel('cdiv', { class: "clicker-service-review-text clicker-service-modal-wrapper-mobile" },
+        crel('cdiv', { class: "clicker-reviews-text-themed clicker-service-review-text clicker-service-modal-wrapper-mobile" },
           crel('cdiv', { class: "clicker-service-review-text-short" },
             crel('cp', {},
               'Отзывов пока что нет'
@@ -1863,19 +2065,18 @@ font-weight: 300;
             crel('cp', {},
             )
           ),
-          crel('cdiv', { class: 'clicker-service-review-text-shadow clicker-service-review-text-shadow-mobile' })
+          crel('cdiv', { class: 'clicker-reviews-text-shadow-themed clicker-service-review-text-shadow clicker-service-review-text-shadow-mobile' })
         ));
     const serviceBlock = (servicePageConfig ) =>
-
       crel(
-        crel('cdiv', { class: "clicker-service-container clicker-service-container-mobile" },
+        crel('cdiv', { class: "clicker-top-block-themed clicker-service-container clicker-service-container-mobile" },
           crel('cdiv', {},
             crel('cdiv', { class: "clicker-service-title-block clicker-service-title-block-mobile" },
               serviceHeader(servicePageConfig.title, servicePageConfig.price),
               serviceWorks(servicePageConfig.description, servicePageConfig.includedWorks, servicePageConfig.notIncludedWorks),
             ),
             serviceReview(),
-            crel('cdiv', { class: 'clicker-service-another-review' },
+            crel('cdiv', { class: 'clicker-top-block-themed clicker-reviews-next-themed clicker-service-another-review' },
               crel('cp', {}, "Еще отзыв"),
               crel('cdiv', { class: 'clicker-service-another-review-underline' }),
             )
@@ -1894,18 +2095,18 @@ font-weight: 300;
       )
     );
     const aboutItemList = (aboutArr) => {
-      let list = crel('cdiv', { class: 'clicker-service-about-items-wrapper clicker-service-about-items-wrapper-mobile' });
+      let list = crel('cdiv', { class: 'clicker-advantage-themed clicker-service-about-items-wrapper clicker-service-about-items-wrapper-mobile' });
       aboutArr.forEach(item => crel(list, crel(serviceAboutItem(item.src, item.title, item.description))));
       return list;
     };
 
-    const footer = crel('cdiv', { class: 'clicker-service-footer' },
+    const footer = crel('cdiv', { class: 'clicker-footer-block-themed clicker-service-footer' },
       crel('cdiv', { class: 'clicker-service-footer-container clicker-service-footer-container-mobile' },
         crel('cdiv', { class: 'clicker-service-footer-text' },
           crel('cdiv', { class: 'clicker-service-footer-text-header clicker-service-footer-text-header-mobile clicker-service-footer-text-header-font-mobile' },
-            crel('cp', {}, "Остались вопросы?")),
+            crel('cp', {class: 'clicker-footer-title-themed'}, "Остались вопросы?")),
           crel('cdiv', { class: 'clicker-service-phone clicker-service-footer-text-header-mobile clicker-service-phone-mobile' },
-            crel('a', {href: '/'}, "8 800 222-91-87")
+            crel('a', {class: 'clicker-telephone-themed', href: 'tel:+78002229187'}, "8 800 222-91-87")
           ),
         ),
         crel('cdiv', { class: 'clicker-service-wrapper-footer-icons clicker-service-wrapper-footer-icons-mobile' },
@@ -1929,27 +2130,23 @@ font-weight: 300;
         )
       )
     );
-    const aboutBlock = (aboutItemArr) => crel('cdiv', { class: "clicker-service-about" },
+    const aboutBlock = (aboutItemArr) => crel('cdiv', { class: "clicker-middle-block-themed clicker-service-about" },
       crel('cdiv', { class: "clicker-service-about-container clicker-service-about-container-mobile" },
         crel('cdiv', { class: "clicker-service-about-i" },
-          crel('ch2', { class: "clicker-service-about-us-header clicker-service-about-us-header-mobile" }, "Как это работает"),
-          crel('cp', { class: "clicker-service-about-us-description" }, "Передадим ваш заказ проверенным компаниям по установке." +
+          crel('ch2', { class: "clicker-about-title-themed clicker-service-about-us-header clicker-service-about-us-header-mobile" }, "Как это работает"),
+          crel('cp', { class: "clicker-about-describe-themed clicker-service-about-us-description" }, "Передадим ваш заказ проверенным компаниям по установке." +
             "Проследим, чтобы все было сделано качественно, в срок и по оговоренной цене." +
             "Поможем, если что-то пойдет не так."),
-
           crel(aboutItemList(aboutItemArr),
-            crel('cdiv', { id:'clicker-service-add-btn', class: ' clicker-service-add-btn_m clicker-service-modal-close' },
-              crel('cp', {}, "Добавить к заказу")
+            crel('cdiv', { id:'clicker-service-add-btn', class: 'clicker-add-service-themed clicker-service-add-btn_m clicker-service-modal-close' },
+              crel('cp', {class: 'clicker-add-service-text-themed'}, "Добавить к заказу")
             ),
             crel('cdiv', { class: 'clicker-offer-block' },
-              crel('cp', {},
-                "Нажимая кнопку «Добавить к заказу», я даю согласие на обработку персональных данных," +
-                "включая право поручения обработки другим лицам, на условиях, изложенных  в ",
-                crel("a", { target:'_blank',  href: "https://www.holodilnik.ru/defence/" }, 'Политике в отношении обработки персональных данных в Интернете'),
-                " с которой я ознакомился, подтверждаю своё согласие с ",
-                crel('a', { target:'_blank', href: "https://clicker.one/documents/privacy" }, "политикой конфиденциальности "),
+              crel('cp', {class: 'clicker-offer-text-themed'},
+                "Нажимая кнопку «Добавить к заказу», я подтверждаю своё согласие с " ,
+                crel('a', {class: 'clicker-confidential-link-themed', target:'_blank', href: "https://clicker.one/documents/privacy" }, "политикой конфиденциальности "),
                 " и приниимаю условия ",
-                crel('a', { target:'_blank', href: offerLink }, "оферты"),
+                crel('a' , {class: 'clicker-offer-link-themed', target:'_blank', href: offerLink }, "оферты"),
               )
             ),
           ),
@@ -1962,7 +2159,7 @@ font-weight: 300;
         crel(modalContent('clicker-service-modal-decorator clicker-service-modal-decorator-mobile'),
           crel(modalBody('clicker-service-modal-body'),
             crossExit,
-            crel('cdiv', { class: "clicker-service-wrapper clicker-service-wrapper-mobile" },
+            crel('cdiv', { class: "clicker-top-block-themed clicker-service-wrapper clicker-service-wrapper-mobile" },
               crel('cdiv', { class: "clicker-service-modal-wrapper clicker-service-modal-wrapper-mobile" },
                 serviceBlock(pageData)
               )
@@ -1986,7 +2183,6 @@ font-weight: 300;
           serviceHeader(title, localData.price),
           serviceWorks(localData.description, localData.includedWorks, localData.notIncludedWorks)
         )
-        console.log(localData);
         showFullHandle()
       })()
       return localData
@@ -2001,7 +2197,7 @@ font-weight: 300;
   let pageDataController = null;
   let shortPageDataController = null;
   //*****Сетевые запросы *****//
-  const CLICKER_API = 'https://clicker-git-newmodal.clicker.now.sh/api/';
+  const CLICKER_API = 'https://app.clicker.one/api/';
 
   const getRequest = (queryParams, url, data) => {
     return $.ajax({
@@ -2116,7 +2312,8 @@ font-weight: 300;
       anotherRev.fadeOut("slow");
       $('.clicker-stars-block').empty();
       for (let i = 0; i < reviews[revIndex].rate; i++) {
-        let cdiv = $(crel('ctd', {})).append('<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 0L14.0819 7.9463H22.4371L15.6776 12.8574L18.2595 20.8037L11.5 15.8926L4.74047 20.8037L7.32238 12.8574L0.56285 7.9463H8.91809L11.5 0Z" fill="#B4DCFF"/></svg>');
+        let cdiv = $(crel('ctd', {class: 'clicker-reviews-stars-themed'}))
+          .append('<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 0L14.0819 7.9463H22.4371L15.6776 12.8574L18.2595 20.8037L11.5 15.8926L4.74047 20.8037L7.32238 12.8574L0.56285 7.9463H8.91809L11.5 0Z" fill="#B4DCFF"/></svg>');
         $('.clicker-stars-block').append(cdiv);
       }
 
@@ -2158,10 +2355,7 @@ font-weight: 300;
     let LocalServices = new Map(JSON.parse(localStorage.getItem('clickerServiceStorage')));
     let serviceId =  productId;
     if (LocalServices.has(serviceId)) return;
-    if(!servicesDataMap.get(productId).serviceId) {
-      console.error('Сервис не найден')
-      return;
-    }
+
     LocalServices.set(serviceId, true);
     localStorage.setItem('clickerServiceStorage', JSON.stringify(Array.from(LocalServices.entries())))
   }
@@ -2185,7 +2379,6 @@ font-weight: 300;
   }
 
   let fillServiceData = (service , elements) => {
-     console.log(service)
       let {productId, title ,titleModal, includedWorks, notIncludedWorks, price, quantity } = service
       service.title = titleModal ? titleModal : title;
       service.includedWorks = typeof includedWorks === "string" ? includedWorks.match(serviceRegExp) : [''];
@@ -2204,7 +2397,6 @@ font-weight: 300;
     return () => {
 
       let clickerServiceStorage = new Map(JSON.parse(localStorage.getItem('clickerServiceStorage')));
-      console.log(clickerServiceStorage.has(id))
       checkBox.prop('checked', !!clickerServiceStorage.has(id));
       $checkBox.prop('checked') ? tip.fadeIn(0)
         : tip.fadeOut(0);
@@ -2230,7 +2422,6 @@ font-weight: 300;
     const local = productId;
     const tip = $tip;
     return () => {
-      console.log('chaange');
       if ((shortPageDataController !== null || undefined) && typeof shortPageDataController === "function")
         shortPageDataController(local);
 
@@ -2272,7 +2463,7 @@ font-weight: 300;
     // для этого создаем псвдо модальное окно и проверяем его на наличие фукнции modal
     let bootstrapScriptCheck =  $("<cdiv class='modal fade modal_clicker' role: 'dialog></cdiv>").modal
     if(typeof bootstrapScriptCheck !== "function" && !bootstrapScriptCheck) return false;
-    // далее смотрим среди link стили bootstrap
+    // далее  - см.отрим среди link стили bootstrap
     const bootstrapCssRegExp = /bootstrapOnlyModal[.\w]*[.]{1}css/g;
     let cssFound = false
     Array.from($('link')).some(
@@ -2287,33 +2478,27 @@ font-weight: 300;
 
   let  main = async () => {
     if(typeof jQuery === "undefined" ) {
-      console.error('jquery отсутвует на странице см документацию Clicker')
+      console.error('jquery отсутствует на странице  - см. документацию Clicker')
       return;
     }
 
-    // if(!bootstrapExistCheck()) {
-    //   console.error('bootstrap отсутвует на странице см документацию Clicker')
-    //   return;
-    // }
-
     if(!clickerInitOption) {
-      console.error('clickerInitOption отсутвует на странице см документацию Clicker')
+      console.error('clickerInitOption отсутствует на странице  - см. документацию Clicker')
       return;
     }
 
     let clickerControlElements = $('div[clickerElement]');
 
     if(typeof clickerControlElements === "undefined" || !clickerControlElements || clickerControlElements.length === 0) {
+      console.error('Не найдены clickerElements');
       return;
     }
 
     if((!clickerInitOption.city ) || (!clickerInitOption.shopSlug)) {
       $(clickerControlElements).fadeOut(0);
-      console.error('city or shopSlug в clickerInitOption отсутсвуют см документацию Clicker');
+      console.error('city or shopSlug в clickerInitOption отсутсвуют  - см. документацию Clicker');
       return;
     }
-
-
 
     // выполняем коллбек от магазина
     if(!!clickerInitOption.clickerServicesExistCallback) {
@@ -2327,30 +2512,35 @@ font-weight: 300;
     // 1 сделать запрос с товарами и получить услуги , оферту и отзывы
     let productDataToServer = []
 
-
+    let validateClickerDataElement = (parametr, message) => {
+      if(typeof parametr === "undefined" || !parametr) throw new Error(message);
+    }
     // 1.1 формируем данные для отправки на бек
     Array.from(clickerControlElements).forEach(element => {
       let $element = $(element);
       let elementClickerData = $element.attr('clickerData');
-      if(typeof elementClickerData !== "undefined" || elementClickerData !== null) {
+      if(typeof elementClickerData !== "undefined" && elementClickerData !== null) {
         try {
           let readyElementClickerData = (JSON.parse(elementClickerData));
           let {productId, title, categoryId} = readyElementClickerData;
-          if(!!productId || !!title || !!categoryId) {
-            elementsMap.set(productId, $element)
-            productDataToServer.push(readyElementClickerData)
-          }
+          validateClickerDataElement(productId, 'Не найден обязательный параметр productId - см. документацию Clicker');
+          validateClickerDataElement(title, 'Не найден обязательный параметр title - см. документацию Clicker');
+          validateClickerDataElement(categoryId, 'Не найден обязательный параметр categoryId - см. документацию Clicker');
+          elementsMap.set(productId, $element)
+          productDataToServer.push(readyElementClickerData)
+
         } catch (e) {
           $element.fadeOut(0);
-          console.error(e)
+          console.error(e);
         }
+      } else {
+        console.error('Не найден clickerData - см. документацию Clicker')
       }
     });
 
     if(productDataToServer.length === 0) {
       $(clickerControlElements).fadeOut(0);
-      console.error('Не найдены clickerElement см документацию clicker')
-      return ;
+      return;
     }
 
     // пытаемся отправить и получить данные с бека
@@ -2362,10 +2552,10 @@ font-weight: 300;
 
     } catch (e) {
       $(clickerControlElements).fadeOut(0);
+      if(e.responseText === 'ok') return ;
       console.error(e.responseText);
       return;
     }
-
 
     let {shopInfo, services} = dataFromServer;
 
@@ -2376,16 +2566,15 @@ font-weight: 300;
     }
 
     let {offerLink, reviews} = shopInfo;
-    if(!!offerLink) offerLink = '';
+    if(!offerLink) offerLink = '';
 
     if (!Array.isArray(reviews)) reviews = [];
-
     // 2 если все нормально - отрисовать
     // Блок который содержит внутри все наши стили , модальные окна
-    crel(clickerContainer,modalStyleEl ,clickerContainerStyleEl,shortStyleEl, fullStyleEl)
+    crel(clickerContainer,modalStyleEl ,clickerContainerStyleEl,shortStyleEl, fullStyleEl, styledModalEL, styledOfferModalEL)
     crel(clickerBlock, fontsEl,  clickerContainer)
     crel(document.body, clickerBlock);
-    //Инициализируем наше модальное окно - возвращает фнкцию для смены состояния модального окна
+    //Инициализируем наше модальное окно - возвращает фнкцию для  - см.ены состояния модального окна
     shortPageDataController = createShortModal(clickerContainer,offerLink,  offerHandle , '');
     pageDataController = createFullModal (clickerContainer,{title:'', price:'0', description:'',
       includedWorks:[], notIncludedWorks:[]}  , offerHandle, '', clickerInitOption.modalPosition, offerLink)
@@ -2406,7 +2595,7 @@ font-weight: 300;
       let $tip= $element.find('p[tip]');
       if(!$checkBox.length || !$span.length ) {
         $element.fadeOut(0);
-        console.error('clickerElement не соотвествует шаблону см документацию Clicker')
+        console.error('clickerElement не соотвествует шаблону  - см. документацию Clicker')
         return;
       }
       // проверка на наличие выбранные услуг в LocalStorage
@@ -2432,8 +2621,6 @@ font-weight: 300;
         offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
       })
       $(window).on('mousedown', (event) => {
-        console.log($(event.target).attr('id'));
-        console.log($(offer.attr('id')).attr('id'));
           if ($(event.target).attr('id') === offer.attr('id')) {
             offer.css('display', 'none');
             offer.trigger(CLICKER_MODAL_EVENTS.CLICKER_OFFER_CLOSE_FORCE);
@@ -2457,7 +2644,6 @@ font-weight: 300;
           _service.trigger(CLICKER_MODAL_EVENTS.CLICKER_SERVICE_CLOSE_FORCE);
         }
       })
-
 
       // заполняем данные для модальных окон
       fillServiceData(service, {$element, $p})
