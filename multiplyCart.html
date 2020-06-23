@@ -584,6 +584,12 @@ dataLayer.push({"region_id":"41"});
               display: inline-block;
               margin-left: 10px;
           }
+
+          .inline-flex-price {
+              justify-content: space-around;
+              width: 20%;
+              display: inline-flex;
+          }
       </style>
       <div><div class="add_guarant"><span class="add_guartant_box" style="margin-right:1em;" onclick="" data-original-title="" title="">Программа «Комфорт+»:</span> <input onchange="ShowDopW(0,22506,2,this);" type="checkbox" value="1" id="idDopW0" name="idDopW[0]" class="idDopW"><span style="color:black;">2 года <span class="sep">|</span>1050 руб.</span></div>
       </div>
@@ -595,12 +601,14 @@ dataLayer.push({"region_id":"41"});
                     "vendorCode": "459243",
                     "url": "https://ekaterinburg.holodilnik.ru/gas-stoves/gas_cookers/gefest/brest_1200c7_k8/",
                     "price": "11450",
-                    "quantity": 1
+                    "quantity": 2
                     }'>
           <span description class="clickerSpan">Профессиональная настройка</span>
           <input type="checkbox" class="clickerCheckbox">
-          <p price class="clickerP"></p>
-          <div quantityInfo><p quantity class="clickerP" ></p></div>
+          <div class="inline-flex-price">
+              <p price class="clickerP"></p>
+              <div quantityInfo>(<p quantity class="clickerP" ></p>)</div>
+          </div>
           <p tip class="clickerTipClass">Добавлено. Оплата после оказания услуги</p>
       </div>
 
@@ -666,7 +674,108 @@ dataLayer.push({"region_id":"41"});
       </td></tr>
 </tbody></table></div>
 </form>
+    <style>
+        .clicker-total-container {
+            background: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            width: 450px;
+        }
+        .clicker-total-wrapper {
+            margin: 20px;
+        }
+        .clicker-total-header > p{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 23px;
+            margin-top: 0;
+        }
+        .clicker-total-flex-element {
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+        }
+        .clicker-total-flex-element:first-child {
+            margin-top: 5px;
+        }
+        .clicker-total-flex-element:last-child {
+            margin-bottom: 20px;
+        }
+        .clicker-total-flex-element:not(:first-child) {
+            margin-top: 20px;
+        }
+        .clicker-total-footer{
+            border-top: 1px dashed;
+        }
+        .clicker-total-price {
+            margin-top: 10px;
+        }
+        .clicker-total-content {
+            font-size: 14px;
+        }
+    </style>
+    <div clickerTotal style="display: none;" class="clicker-total-container">
+        <div class="clicker-total-wrapper">
+            <div class="clicker-total-header">
+                <p>Услуги установки</p>
+            </div>
+            <div clickerServicesContent class="clicker-total-content">
+            </div>
+            <div class="clicker-total-price">
+                <div class="clicker-total-flex-element">
+                    <div>
+                        Итого за установку:
+                    </div>
+                    <div style="display: inline-flex; font-weight: bold; font-size: 18px;">
+                        <div clickerTotalPrice>0</div><div style="margin-left: 5px;">руб.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clicker-total-footer">
+            <div class="clicker-total-wrapper" style="font-style: italic;">
+                Оплата услуг установки производится отдельно, после того, как все работы будут выполнены.
+            </div>
+        </div>
+    </div>
 
+    <style>
+        .clicker-total-container-sm {
+            background: #EEEEEE;
+            border: 1px solid #D9D9D9;
+            box-sizing: border-box;
+            width: 450px;
+            font-family: sans-serif;
+        }
+        .clicker-total-wrapper-sm:first-child{
+            margin: 20px 20px 0 20px;
+        }
+        .clicker-total-wrapper-sm:last-child{
+            margin: 0px 20px 20px 20px;
+            color: gray;
+        }
+
+    </style>
+
+    <div  clickerTotal class="clicker-total-container-sm" style="display:none; margin-top: 20px;">
+        <div class="clicker-total-wrapper-sm">
+            <div class="clicker-total-price">
+                <div class="clicker-total-flex-element">
+                    <div>
+                        Услуги установки
+                    </div>
+                    <div style="display: inline-flex; font-weight: bold; font-size: 18px;">
+                        <div clickerTotalPrice>0</div><div style="margin-left: 5px;"> руб.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clicker-total-wrapper-sm" style="font-style: italic;">
+            оплачиваются отдельно после оказания услуги
+        </div>
+    </div>
 </div><div id="add_credit_lite" class="credit_lite_cont" style="display:none; position: absolute; z-index: 10;"><span class="pup" style="width: 740px;  background-position: 54% bottom;">&nbsp;</span>
   <div style="z-index:5000;" class="credit_cl"><a style="padding:0;" href="javascript:onclick=close_credit_lite_blok();"><img width="10" height="10" alt="Закрыть" src="./multiplyCart_files/close_bg.png"></a></div>
 	<div class="credit_text">
@@ -1666,5 +1775,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </script>
 
-<script async defer src="https://clicker-git-pricefix.clicker.now.sh/ClickerServices.js"></script>
+<script async defer src="https://clicker-git-totalblock.clicker.now.sh/ClickerServices.js"></script>
 </body></html>
