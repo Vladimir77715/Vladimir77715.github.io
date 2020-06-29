@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="./multiplyCart_files/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="porthole.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="kurmokaev" type="checkbox" onclick="kek()">
+<script>
+    function kek () {
+        if(document.getElementById('kurmokaev').checked == true) {
+            localStorage.setItem('kek', 'true');
+        } else {
+            localStorage.setItem('kek', 'false');
+        }
+    }
+    var windowProxy;
+    window.onload=function(){
+        // Create a proxy window to send to and receive
+        // messages from the parent
+        windowProxy = new Porthole.WindowProxy(
+            'https://vladimir77715.github.io/index.html');
+
+        // Register an event handler to receive messages;
+        windowProxy.addEventListener(function(event) {
+            window.alert(event)
+        });
+    };
+</script>
+
+</body>
+</html>
