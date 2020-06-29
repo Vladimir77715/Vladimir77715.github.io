@@ -26,6 +26,7 @@
         // Register an event handler to receive messages;
         windowProxy.addEventListener(function(event) {
             document.getElementById('kurmokaev').checked = true;
+            window.alert('kek');
         });
         document.getElementById('kurmokaev').onclick = () => {
             windowProxy.post({'actisfdson': 'supefsfdfrsizeme'});
