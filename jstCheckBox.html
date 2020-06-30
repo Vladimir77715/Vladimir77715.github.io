@@ -19,6 +19,7 @@
 
         // Register an event handler to receive messages;
         windowProxy.addEventListener(function(event) {
+            if(typeof event.data.actisfdson === "undefined")
             document.getElementById('kurmokaev').checked = localStorage.getItem('kek') !== null ? true : false;
         });
         $('#kurmokaev').on('click' , () => {
