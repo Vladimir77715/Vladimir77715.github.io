@@ -7,15 +7,9 @@
     <title>Title</title>
 </head>
 <body>
-<input id="kurmokaev" type="checkbox" onclick="kek()">
+<input id="kurmokaev" type="checkbox">
 <script>
-    function kek () {
-        if(document.getElementById('kurmokaev').checked == true) {
-            localStorage.setItem('kek', 'true');
-        } else {
-            localStorage.setItem('kek', 'false');
-        }
-    }
+
     var windowProxy;
     window.onload=function(){
         // Create a proxy window to send to and receive
@@ -25,12 +19,18 @@
 
         // Register an event handler to receive messages;
         windowProxy.addEventListener(function(event) {
-            document.getElementById('kurmokaev').checked = true;
+            document.getElementById('kurmokaev').checked = localStorage.getItem('kek') !== null;
         });
-        document.getElementById('kurmokaev').onclick = () => {
+        $('#kurmokaev').on('click' , () => {
             windowProxy.post({'actisfdson': 'supefsfdfrsizeme'});
             window.alert('send')
-        }
+            if(document.getElementById('kurmokaev').checked == true) {
+                localStorage.setItem('kek', 'true');
+                window.alert('add to sessionStorage')
+            } else {
+                localStorage.setItem('kek', 'false');
+            }
+        })
     };
 </script>
 
