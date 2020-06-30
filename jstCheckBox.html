@@ -19,7 +19,7 @@
 
         // Register an event handler to receive messages;
         windowProxy.addEventListener(function(event) {
-            document.getElementById('kurmokaev').checked = localStorage.getItem('kek') !== null;
+            document.getElementById('kurmokaev').checked = localStorage.getItem('kek') !== null ? true : false;
         });
         $('#kurmokaev').on('click' , () => {
             windowProxy.post({'actisfdson': 'supefsfdfrsizeme'});
